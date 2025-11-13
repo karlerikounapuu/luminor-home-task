@@ -64,3 +64,11 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "activeadmin", "= 4.0.0beta18"
+
+gem "devise", "~> 4.9"
+
+gem "activeadmin_assets", "~> 1.1"
+
+gem "cancancan", "~> 3.6"
