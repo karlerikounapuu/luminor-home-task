@@ -1,0 +1,1 @@
+json.partial! "configuration_item_relationships/configuration_item_relationship", configuration_item_relationship: @configuration_item_relationship

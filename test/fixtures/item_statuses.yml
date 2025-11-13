@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Active
+  description: Active
+  active: false
+
+two:
+  name: Retired
+  description: Retired
+  active: false

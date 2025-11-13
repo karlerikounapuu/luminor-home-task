@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @configuration_item_relationship %>
+
+<div>
+  <%= link_to "Edit this configuration item relationship", edit_configuration_item_relationship_path(@configuration_item_relationship) %> |
+  <%= link_to "Back to configuration item relationships", configuration_item_relationships_path %>
+
+  <%= button_to "Destroy this configuration item relationship", @configuration_item_relationship, method: :delete %>
+</div>

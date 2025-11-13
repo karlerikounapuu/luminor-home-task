@@ -1,0 +1,12 @@
+<% content_for :title, "Editing item environment" %>
+
+<h1>Editing item environment</h1>
+
+<%= render "form", item_environment: @item_environment %>
+
+<br>
+
+<div>
+  <%= link_to "Show this item environment", @item_environment %> |
+  <%= link_to "Back to item environments", item_environments_path %>
+</div>

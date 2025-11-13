@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Item environments" %>
+
+<h1>Item environments</h1>
+
+<div id="item_environments">
+  <% @item_environments.each do |item_environment| %>
+    <%= render item_environment %>
+    <p>
+      <%= link_to "Show this item environment", item_environment %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New item environment", new_item_environment_path %>

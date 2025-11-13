@@ -1,0 +1,11 @@
+<% content_for :title, "New configuration item" %>
+
+<h1>New configuration item</h1>
+
+<%= render "form", configuration_item: @configuration_item %>
+
+<br>
+
+<div>
+  <%= link_to "Back to configuration items", configuration_items_path %>
+</div>

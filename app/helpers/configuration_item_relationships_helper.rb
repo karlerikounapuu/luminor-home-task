@@ -1,0 +1,2 @@
+module ConfigurationItemRelationshipsHelper
+end
