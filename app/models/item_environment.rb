@@ -1,5 +1,5 @@
 class ItemEnvironment < ApplicationRecord
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
   has_many :configuration_items, dependent: :restrict_with_error
 
   def self.ransackable_attributes(auth_object = nil)

@@ -1,5 +1,5 @@
 class RelationshipType < ApplicationRecord
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
   has_many :configuration_item_relationships, dependent: :restrict_with_error
 
   def self.ransackable_attributes(auth_object = nil)

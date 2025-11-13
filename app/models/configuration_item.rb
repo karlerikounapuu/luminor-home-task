@@ -3,7 +3,7 @@ class ConfigurationItem < ApplicationRecord
   belongs_to :item_status
   belongs_to :item_environment
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
 
   # Add relationship associations
   # Dependencies: what this CI depends on
