@@ -8,7 +8,7 @@ ActiveAdmin.register ItemType do
     column :name
     column :description
     column :active do |item_type|
-      status_tag item_type.active ? 'Active' : 'Inactive', class: item_type.active ? 'ok' : 'error'
+      status_tag item_type.active ? "Active" : "Inactive", class: item_type.active ? "ok" : "error"
     end
     column :created_at
     actions

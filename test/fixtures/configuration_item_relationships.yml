@@ -1,6 +1,6 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  source_configuration_item: one
-  target_configuration_item: two
+  dependent_configuration_item: one
+  dependency_configuration_item: two
   relationship_type: one

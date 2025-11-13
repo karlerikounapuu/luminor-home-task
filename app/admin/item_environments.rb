@@ -8,7 +8,7 @@ ActiveAdmin.register ItemEnvironment do
     column :name
     column :description
     column :active do |item_environment|
-      status_tag item_environment.active ? 'Active' : 'Inactive', class: item_environment.active ? 'ok' : 'error'
+      status_tag item_environment.active ? "Active" : "Inactive", class: item_environment.active ? "ok" : "error"
     end
     column :created_at
     actions

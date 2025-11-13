@@ -5,24 +5,18 @@ class ConfigurationItem < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 
-  # Add relationship associations
-  # Dependencies: what this CI depends on
   has_many :outgoing_relationships,
            class_name: "ConfigurationItemRelationship",
            foreign_key: :dependent_configuration_item_id,
            dependent: :destroy
 
-  # Dependents: what depends on this CI
   has_many :incoming_relationships,
            class_name: "ConfigurationItemRelationship",
-           foreign_key: :dependency_configuration_item_id,
-           dependent: :restrict_with_error
+           foreign_key: :dependency_configuration_item_id
 
-  # Convenience methods
   has_many :dependencies, through: :outgoing_relationships, source: :dependency_configuration_item
   has_many :dependents, through: :incoming_relationships, source: :dependent_configuration_item
 
-  # Prevent deletion if this CI has dependents
   before_destroy :check_for_dependents
 
   private

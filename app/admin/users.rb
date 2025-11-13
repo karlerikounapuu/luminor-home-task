@@ -6,7 +6,7 @@ ActiveAdmin.register User do
     id_column
     column :email
     column :role do |user|
-      status_tag user.role, class: user.admin? ? 'ok' : 'warning'
+      status_tag user.role, class: user.admin? ? "ok" : "warning"
     end
     column :created_at
     actions
@@ -31,7 +31,7 @@ ActiveAdmin.register User do
       row :id
       row :email
       row :role do |user|
-        status_tag user.role, class: user.admin? ? 'ok' : 'warning'
+        status_tag user.role, class: user.admin? ? "ok" : "warning"
       end
       row :created_at
       row :updated_at

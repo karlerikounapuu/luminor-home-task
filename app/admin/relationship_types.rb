@@ -8,7 +8,7 @@ ActiveAdmin.register RelationshipType do
     column :name
     column :description
     column :active do |relationship_type|
-      status_tag relationship_type.active ? 'Active' : 'Inactive', class: relationship_type.active ? 'ok' : 'error'
+      status_tag relationship_type.active ? "Active" : "Inactive", class: relationship_type.active ? "ok" : "error"
     end
     column :created_at
     actions
