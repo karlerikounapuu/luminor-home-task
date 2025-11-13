@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_13_171035) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_13_210324) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -30,15 +30,15 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_13_171035) do
 
   create_table "configuration_item_relationships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.uuid "dependency_configuration_item_id", null: false
+    t.uuid "dependent_configuration_item_id", null: false
     t.uuid "relationship_type_id", null: false
-    t.uuid "source_configuration_item_id", null: false
-    t.uuid "target_configuration_item_id", null: false
     t.datetime "updated_at", null: false
+    t.index ["dependency_configuration_item_id"], name: "idx_on_dependency_configuration_item_id_382cad054b"
+    t.index ["dependent_configuration_item_id", "dependency_configuration_item_id", "relationship_type_id"], name: "unique_configuration_item_relationship", unique: true
+    t.index ["dependent_configuration_item_id"], name: "idx_on_dependent_configuration_item_id_5b20cbfd42"
     t.index ["relationship_type_id"], name: "index_configuration_item_relationships_on_relationship_type_id"
-    t.index ["source_configuration_item_id", "target_configuration_item_id", "relationship_type_id"], name: "unique_configuration_item_relationship", unique: true
-    t.index ["source_configuration_item_id"], name: "idx_on_source_configuration_item_id_af958287c9"
-    t.index ["target_configuration_item_id"], name: "idx_on_target_configuration_item_id_9e4bd7a1da"
-    t.check_constraint "source_configuration_item_id <> target_configuration_item_id", name: "no_ci_relationship_self_reference"
+    t.check_constraint "dependent_configuration_item_id <> dependency_configuration_item_id", name: "no_ci_relationship_self_reference"
   end
 
   create_table "configuration_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -104,8 +104,8 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_13_171035) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "configuration_item_relationships", "configuration_items", column: "source_configuration_item_id"
-  add_foreign_key "configuration_item_relationships", "configuration_items", column: "target_configuration_item_id"
+  add_foreign_key "configuration_item_relationships", "configuration_items", column: "dependency_configuration_item_id"
+  add_foreign_key "configuration_item_relationships", "configuration_items", column: "dependent_configuration_item_id"
   add_foreign_key "configuration_item_relationships", "relationship_types"
   add_foreign_key "configuration_items", "item_environments"
   add_foreign_key "configuration_items", "item_statuses"

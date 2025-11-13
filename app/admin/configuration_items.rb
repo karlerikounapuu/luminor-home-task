@@ -41,31 +41,67 @@ ActiveAdmin.register ConfigurationItem do
       row :updated_at
     end
 
-    panel "Outgoing Relationships" do
-      table_for configuration_item.outgoing_relationships do
-        column "Type" do |rel|
-          rel.relationship_type.name
+    panel "Dependencies" do
+      if authorized?(:create, ConfigurationItemRelationship)
+        div class: "mb-4" do
+          link_to "Add Dependency",
+                  new_admin_configuration_item_relationship_path(dependent_configuration_item_id: configuration_item.id),
+                  class: "button"
         end
-        column "Target" do |rel|
-          link_to rel.target_configuration_item.name, admin_configuration_item_path(rel.target_configuration_item)
+      end
+
+      if configuration_item.outgoing_relationships.any?
+        table_for configuration_item.outgoing_relationships do
+          column "Type" do |rel|
+            rel.relationship_type.name
+          end
+          column "Dependency" do |rel|
+            link_to rel.dependency_configuration_item.name, admin_configuration_item_path(rel.dependency_configuration_item)
+          end
+          column "Actions" do |rel|
+            span do
+              link_to "View", admin_configuration_item_relationship_path(rel), class: "button"
+            end
+            if authorized?(:destroy, rel)
+              span do
+                link_to "Delete", admin_configuration_item_relationship_path(rel),
+                        method: :delete,
+                        data: { confirm: "Are you sure?" },
+                        class: "button"
+              end
+            end
+          end
         end
-        column "Actions" do |rel|
-          link_to "View", admin_configuration_item_relationship_path(rel)
-        end
+      else
+        para "No dependencies yet.", class: "text-gray-600"
       end
     end
 
-    panel "Incoming Relationships" do
-      table_for configuration_item.incoming_relationships do
-        column "Type" do |rel|
-          rel.relationship_type.name
+    panel "Dependents" do
+      if configuration_item.incoming_relationships.any?
+        table_for configuration_item.incoming_relationships do
+          column "Type" do |rel|
+            rel.relationship_type.name
+          end
+          column "Dependent" do |rel|
+            link_to rel.dependent_configuration_item.name, admin_configuration_item_path(rel.dependent_configuration_item)
+          end
+          column "Actions" do |rel|
+            span do
+              link_to "View", admin_configuration_item_relationship_path(rel), class: "button"
+            end
+            if authorized?(:destroy, rel)
+              span do
+                link_to "Delete", admin_configuration_item_relationship_path(rel),
+                        method: :delete,
+                        data: { confirm: "Are you sure?" },
+                        class: "button"
+              end
+            end
+          end
         end
-        column "Source" do |rel|
-          link_to rel.source_configuration_item.name, admin_configuration_item_path(rel.source_configuration_item)
-        end
-        column "Actions" do |rel|
-          link_to "View", admin_configuration_item_relationship_path(rel)
-        end
+      else
+        para "No dependents yet.", class: "text-gray-600"
       end
     end
   end
