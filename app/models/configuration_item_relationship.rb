@@ -26,7 +26,7 @@ class ConfigurationItemRelationship < ApplicationRecord
     # Check if adding this relationship would create a cycle
     # We check across ALL relationship types since depends_on, uses, runs_on are all dependencies
     if would_create_cycle?
-      errors.add(:base, "This relationship would create a circular dependency")
+      errors.add(:dependency_configuration_item, "This relationship would create a circular dependency")
     end
   end
 
@@ -36,7 +36,7 @@ class ConfigurationItemRelationship < ApplicationRecord
     can_reach?(dependency_configuration_item_id, dependent_configuration_item_id)
   end
 
-  def can_reach?(from_id, to_id, visited = Set.new, depth = 0)
+  def can_reach? (from_id, to_id, visited = Set.new, depth = 0)
     return false if depth > 100 # Prevent infinite loops
     return true if from_id == to_id
     return false if visited.include?(from_id)
