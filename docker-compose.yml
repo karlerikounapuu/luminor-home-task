@@ -19,8 +19,7 @@ services:
     depends_on:
       - db
     environment:
-      RAILS_ENV: development
-      DATABASE_URL: postgres://postgres:password@db:5432/postgres
+      POSTGRES_HOST: db
       SECRET_KEY_BASE: hotdog
 
 volumes:

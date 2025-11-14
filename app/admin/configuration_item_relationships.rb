@@ -1,4 +1,5 @@
 ActiveAdmin.register ConfigurationItemRelationship do
+  menu false
   permit_params :dependent_configuration_item_id, :dependency_configuration_item_id, :relationship_type_id
 
   controller do
