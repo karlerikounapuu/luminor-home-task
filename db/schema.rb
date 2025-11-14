@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_13_210324) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_14_083016) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -51,6 +51,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_13_210324) do
     t.datetime "updated_at", null: false
     t.index ["item_environment_id"], name: "index_configuration_items_on_item_environment_id"
     t.index ["item_status_id"], name: "index_configuration_items_on_item_status_id"
+    t.index ["item_type_id", "item_status_id"], name: "idx_configuration_items_on_type_and_status"
     t.index ["item_type_id"], name: "index_configuration_items_on_item_type_id"
     t.index ["name"], name: "index_configuration_items_on_name", unique: true
   end
