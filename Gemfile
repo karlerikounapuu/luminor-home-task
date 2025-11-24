@@ -65,7 +65,7 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "activeadmin", "= 4.0.0beta18"
+gem "activeadmin", "4.0.0.beta19"
 
 gem "devise", "~> 4.9"
 
